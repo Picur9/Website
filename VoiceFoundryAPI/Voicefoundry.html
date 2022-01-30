@@ -1,0 +1,118 @@
+<html lang="en-GB"><head>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+		<title>Geza Petrucsik - Website</title>
+		<link rel="stylesheet" href="https://s3.eu-west-1.amazonaws.com/petrucsik.co.uk/style.css">
+	</head>
+	<body><div class="navbar">
+		<nav>
+		   <div class="logo">
+			<a href="http://petrucsik.co.uk" class="custom-logo-link" rel="home" aria-current="page"><img width="200" height="80" src="https://s3.eu-west-1.amazonaws.com/petrucsik.co.uk/aws-logo.png"></a></div>
+	  <ul class="menu-area">
+	  <li><a href="http://petrucsik.co.uk">Home</a></li>
+	  <li><a href="https://petrucsik.co.uk/cv/NewCV.html">CV</a></li>
+	  <li><a href="https://petrucsik.wordpress.com/blog/">Blog</a></li>
+	  <li><a href="https://petrucsik.co.uk/pictures/pictures.html">Pictures</a></li>
+	  <li><a href="http://dynamodb.petrucsik.co.uk">Project No1</a></li>
+	  <li><a href="http://project.petrucsik.co.uk">Project No2</a></li>
+	  <li><a href="https://petrucsik.co.uk/personalblog/PersonalBlog.html">Personal Blog</a></li>
+	  <li><a href="http://contact.petrucsik.co.uk">Contact</a></li>
+	  </ul>
+	  </nav>  </div>
+	  			
+		
+<h1 class="entry-title">Number transformation to Vanity Numbers</h1>
+	</header>
+
+				
+	<div class="entry-content">
+		
+<p>This project has been created as part of my 3rd round interview!</p>
+<p>Project details: Create and Amazon Connect Call centre which use a Lambda function to transform the incoming caller number to vanity numbers.</p>
+<p>Store the best 5 to a DynamoDb table and give back the top 3 to the caller. </p>
+<p> The Amazon Connect flow number is +441135380153</p>
+<img src="https://s3.eu-west-1.amazonaws.com/project.petrucsik.co.uk/VoiceFoundryProject.png" style="width:55%">
+
+
+<p>Technologies used:</p>
+
+
+
+<p>DynamoDB, Lambda, API Gateway, Python, JavaScript, CSS, Amazon Connect, </p>
+ 
+<div class=project>
+    <form id="callapigateway" name="callapigateway">
+     <br>
+     <label for="project">Phone Number</label> <br>
+     <select class="doboz" id="CallerId">
+      <option class=doboz selected="selected">Select a phone number?</option>
+     </select> <!-- Will be populated later-->
+     <br>
+     <button type="button" value="inputsbutton" onclick="callapigw()">GO</button>
+     <br>
+     <label for="project">Your 5 best vanity numbers are:</label>
+     <br><div class="doboz" height="3row" name="List for today" id="number">Your options will be displayed here</div>
+	</form>
+
+</div></div>
+	<script type="text/javascript" src="lib/axios/dist/axios.standalone.js"></script>
+	<script type="text/javascript" src="lib/CryptoJS/rollups/hmac-sha256.js"></script>
+	<script type="text/javascript" src="lib/CryptoJS/rollups/sha256.js"></script>
+	<script type="text/javascript" src="lib/CryptoJS/components/hmac.js"></script>
+	<script type="text/javascript" src="lib/CryptoJS/components/enc-base64.js"></script>
+	<script type="text/javascript" src="lib/url-template/url-template.js"></script>
+	<script type="text/javascript" src="lib/apiGatewayCore/sigV4Client.js"></script>
+	<script type="text/javascript" src="lib/apiGatewayCore/apiGatewayClient.js"></script>
+	<script type="text/javascript" src="lib/apiGatewayCore/simpleHttpClient.js"></script>
+	<script type="text/javascript" src="lib/apiGatewayCore/utils.js"></script>
+	<script type="text/javascript" src="apigClient.js"></script>  
+	<script type="text/javascript">
+	var apigClient = apigClientFactory.newClient();
+
+		apigClient.getnumberPost({}, {})
+		.then(function(result){
+		var items = result.data.Items;
+		console.log(items);
+		var x = document.getElementById("CallerId");
+		for (var i = 0; i < items.length; i++){
+		var option = document.createElement("option");
+		option.text = items[i].CallerId.S;
+		x.add(option);
+		//option.value = items[i].CallerId.S;
+		//select.appendChild(option);
+		}
+		}).catch( function(result){
+		//This is where you would put an error callback
+	   });
+	   
+	   
+	   
+	   function callapigw() {
+		 var apigClient = apigClientFactory.newClient();
+		 var x = document.getElementById("CallerId");
+		 var iCallerId = x.options[x.selectedIndex].value;
+	   
+		 if (iCallerId == null || iCallerId == "") {return false;}
+	   
+		 var body = "{\"CallerId\":\"" + iCallerId + "\"}";
+	   
+		 apigClient.getdataPost({}, body, {})
+			 .then(function(result){
+				 var dataoutput = result.data.Items[0];
+				 console.log(dataoutput);
+				 document.getElementById("number").innerText = dataoutput.Option1.S + "\n" + dataoutput.Option2.S + "\n" + dataoutput.Option3.S + "\n" + dataoutput.Option4.S + "\n" + dataoutput.Option5.S + "\n";
+			 }).catch( function(result){
+			   document.write(result);
+	   
+		 });
+	   
+	   }
+	   	</script>
+	  
+	   
+	   
+		
+			   
+		   </body>
+		   </html>
