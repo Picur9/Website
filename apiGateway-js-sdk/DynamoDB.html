@@ -1,0 +1,119 @@
+<html lang="en-GB"><head>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+		<title>Geza Petrucsik - Website</title>
+		<link rel="stylesheet" href="https://s3.eu-west-1.amazonaws.com/petrucsik.co.uk/style.css">
+	</head>
+	<body><div class="navbar">
+		<nav>
+		   <div class="logo">
+			<a href="http://petrucsik.co.uk" class="custom-logo-link" rel="home" aria-current="page"><img width="200" height="80" src="https://s3.eu-west-1.amazonaws.com/petrucsik.co.uk/aws-logo.png"></a></div>
+	  <ul class="menu-area">
+	  <li><a href="http://petrucsik.co.uk">Home</a></li>
+	  <li><a href="https://s3.eu-west-1.amazonaws.com/petrucsik.co.uk/cv/NewCV.html">CV</a></li>
+	  <li><a href="https://petrucsik.wordpress.com/blog/">Blog</a></li>
+	  <li><a href="https://s3.eu-west-1.amazonaws.com/petrucsik.co.uk/pictures/pictures.html">Pictures</a></li>
+	  <li><a href="http://dynamodb.petrucsik.co.uk">Projects</a></li>
+	  <li><a href="http://project.petrucsik.co.uk">Project No2</a></li>
+	  <li><a href="https://s3.eu-west-1.amazonaws.com/petrucsik.co.uk/personalblog/PersonalBlog.html">Personal Blog</a></li>
+	  <li><a href="http://contact.petrucsik.co.uk">Contact</a></li>
+	  </ul>
+	  </nav>  
+
+	</div>		
+		
+<h1 class="entry-title">Countries and Workplaces</h1>
+	</header>
+
+				
+	<div class="entry-content">
+		
+<p>This project has been created to practise AWS services and make some fun!</p>
+
+
+
+<p>Technologies used:</p>
+
+
+
+<p>DynamoDB, Lambda, API Gateway, CI/CD, JavaScript, CSS, </p>
+
+ <div class=project>
+   <form id="callapigateway" name="callapigateway">
+    <br>
+    <label for="project">Work Data</label> <br>
+    <select class="doboz" id="Date">
+     <option class=doboz selected="selected">Which year would you like to know?</option>
+    </select> <!-- Will be populated later-->
+	<br>
+    <button type="button" value="inputsbutton" onclick="callapigw()">GO</button>
+    <br>
+    <label for="project">City</label><br>
+    <div class="doboz" type="text" name="city" id="city"> City I use to live </div>
+	<br>
+    <label for="project">Other informations</label>
+    <br><div class="doboz" height="3row" name="List for today" id="info" >Coutry, Job, Workplace</div>
+
+</form></div>	</div>	
+	<script type="text/javascript" src="lib/axios/dist/axios.standalone.js"></script>
+  <script type="text/javascript" src="lib/CryptoJS/rollups/hmac-sha256.js"></script>
+  <script type="text/javascript" src="lib/CryptoJS/rollups/sha256.js"></script>
+  <script type="text/javascript" src="lib/CryptoJS/components/hmac.js"></script>
+  <script type="text/javascript" src="lib/CryptoJS/components/enc-base64.js"></script>
+  <script type="text/javascript" src="lib/url-template/url-template.js"></script>
+  <script type="text/javascript" src="lib/apiGatewayCore/sigV4Client.js"></script>
+  <script type="text/javascript" src="lib/apiGatewayCore/apiGatewayClient.js"></script>
+  <script type="text/javascript" src="lib/apiGatewayCore/simpleHttpClient.js"></script>
+  <script type="text/javascript" src="lib/apiGatewayCore/utils.js"></script>
+  <script type="text/javascript" src="apigClient.js"></script>
+<script type="text/javascript">
+ var apigClient = apigClientFactory.newClient();
+
+  apigClient.getdataPost({}, {})
+   .then(function(result){
+	var items = result.data.Items;
+	console.log(items);
+	var x = document.getElementById("Date");
+	for (var i = 0; i < items.length; i++){
+	 var option = document.createElement("option");
+	 option.text = items[i].Date.S;
+	 x.add(option);
+	 //option.value = items[i].Date.S;
+	 //select.appendChild(option);
+	}
+   }).catch( function(result){
+   //This is where you would put an error callback
+});
+
+
+
+function callapigw() {
+  var apigClient = apigClientFactory.newClient();
+  var x = document.getElementById("Date");
+  var iDate = x.options[x.selectedIndex].value;
+
+  if (iDate == null || iDate == "") {return false;}
+
+  var body = "{\"Date\":\"" + iDate + "\"}";
+
+  apigClient.getdatePost({}, body, {})
+	  .then(function(result){
+		  var dataoutput = result.data.Items[0];
+		  console.log(dataoutput);
+		  document.getElementById("city").innerText = dataoutput.City.S
+		  document.getElementById("info").innerText = dataoutput.Country.S + "\n" + dataoutput.Job.S + "\n" + dataoutput.Workplaces.S + "\n";
+	  }).catch( function(result){
+		document.write(result);
+
+  });
+
+}
+	
+
+
+  </script>
+	
+
+	</body>
+	</html>

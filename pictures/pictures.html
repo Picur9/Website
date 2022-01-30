@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Geza Petrucsik - Website</title>
+    <link rel="stylesheet" href="https://s3.eu-west-1.amazonaws.com/petrucsik.co.uk/style.css">
+</head>
+<body><div class="navbar">
+    <nav>
+       <div class="logo">
+        <a href="http://petrucsik.co.uk" class="custom-logo-link" rel="home" aria-current="page"><img width="200" height="80" src="https://s3.eu-west-1.amazonaws.com/petrucsik.co.uk/aws-logo.png"></a></div>
+        <ul class="menu-area">
+          <li><a href="http://petrucsik.co.uk">Home</a></li>
+          <li><a href="https://s3.eu-west-1.amazonaws.com/petrucsik.co.uk/cv/NewCV.html">CV</a></li>
+          <li><a href="https://petrucsik.wordpress.com/blog/">Blog</a></li>
+          <li><a href="https://s3.eu-west-1.amazonaws.com/petrucsik.co.uk/pictures/pictures.html">Pictures</a></li>
+          <li><a href="http://dynamodb.petrucsik.co.uk">Project No1</a></li>
+          <li><a href="http://project.petrucsik.co.uk">Project No2</a></li>
+          <li><a href="https://s3.eu-west-1.amazonaws.com/petrucsik.co.uk/personalblog/PersonalBlog.html">Personal Blog</a></li>
+          <li><a href="http://contact.petrucsik.co.uk">Contact</a></li>
+  </ul>
+  </nav>  
+
+  
+  
+  </div>
+  <br><br><br>
+		
+<h1 class="entry-title">Pictures</h1>
+	</header>
+
+				
+	<div class="entry-content">
+<br>
+<h2 style="text-align:center">Slideshow Gallery</h2>
+
+<div class="container">
+  <div class="mySlides">
+    <div class="numbertext">1 / 6</div>
+    <img src="https://s3.eu-west-1.amazonaws.com/pictures.petrucsik.co.uk/IMG_20150328_114549.jpg" style="width:55%">
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">2 / 6</div>
+    <img src="https://s3.eu-west-1.amazonaws.com/pictures.petrucsik.co.uk/IMG_20150328_124651-szerkesztette+a+k%C3%B6vetkez%C5%91t_.jpg" style="width:55%">
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">3 / 6</div>
+    <img src="https://s3.eu-west-1.amazonaws.com/pictures.petrucsik.co.uk/IMG_20150329_130431-szerkesztette+a+k%C3%B6vetkez%C5%91t_.jpg" style="width:55%">
+  </div>
+    
+  <div class="mySlides">
+    <div class="numbertext">4 / 6</div>
+    <img src="https://s3.eu-west-1.amazonaws.com/pictures.petrucsik.co.uk/IMG_20150329_160738.jpg" style="width:55%">
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">5 / 6</div>
+    <img src="https://s3.eu-west-1.amazonaws.com/pictures.petrucsik.co.uk/IMG_20160505_211944.jpg" style="width:55%">
+  </div>
+    
+  <div class="mySlides">
+    <div class="numbertext">6 / 6</div>
+    <img src="https://s3.eu-west-1.amazonaws.com/pictures.petrucsik.co.uk/IMG_20210327_103828.jpg" style="width:55%">
+  </div>
+    
+  <a class="prev" onclick="plusSlides(-1)">❮</a>
+  <a class="next" onclick="plusSlides(1)">❯</a>
+
+  <div class="caption-container">
+    <p id="caption"></p>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <img class="demo cursor" src="https://s3.eu-west-1.amazonaws.com/pictures.petrucsik.co.uk/IMG_20150328_114549.jpg" style="width:100%" onclick="currentSlide(1)" alt="My Son">
+    </div>
+    <div class="column">
+      <img class="demo cursor" src="https://s3.eu-west-1.amazonaws.com/pictures.petrucsik.co.uk/IMG_20150328_124651-szerkesztette+a+k%C3%B6vetkez%C5%91t_.jpg" style="width:100%" onclick="currentSlide(2)" alt="Peyton in my hand">
+    </div>
+    <div class="column">
+      <img class="demo cursor" src="https://s3.eu-west-1.amazonaws.com/pictures.petrucsik.co.uk/IMG_20150329_130431-szerkesztette+a+k%C3%B6vetkez%C5%91t_.jpg" style="width:100%" onclick="currentSlide(3)" alt="my first car journey">
+    </div>
+    <div class="column">
+      <img class="demo cursor" src="https://s3.eu-west-1.amazonaws.com/pictures.petrucsik.co.uk/IMG_20150329_160738.jpg" style="width:100%" onclick="currentSlide(4)" alt="Back to the hospital">
+    </div>
+    <div class="column">
+      <img class="demo cursor" src="https://s3.eu-west-1.amazonaws.com/pictures.petrucsik.co.uk/IMG_20160505_211944.jpg" style="width:100%" onclick="currentSlide(5)" alt="We play basketball">
+    </div>    
+    <div class="column">
+      <img class="demo cursor" src="https://s3.eu-west-1.amazonaws.com/pictures.petrucsik.co.uk/IMG_20210327_103828.jpg" style="width:100%" onclick="currentSlide(6)" alt="Peyton 6">
+    </div>
+  </div>
+</div>
+
+<script>
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  var captionText = document.getElementById("caption");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  captionText.innerHTML = dots[slideIndex-1].alt;
+}
+</script>
+
+  </body>
+  </html>
